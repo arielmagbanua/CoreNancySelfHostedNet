@@ -5,7 +5,7 @@ using Nancy.Security;
 
 namespace CoreNancySelfHostedNet.Modules
 {
-    class SecureModule : NancyModule
+    public class SecureModule : NancyModule
     {
         //by this time, the api key should have already been pulled out of our querystring
         //and, using the api key, an identity assigned to our NancyContext
@@ -29,9 +29,8 @@ namespace CoreNancySelfHostedNet.Modules
 
             Post("/create_user", args =>
             {
-                Tuple<string, string> user = UserDatabase.CreateUser(this.Context.Request.Form["username"],
-                    this.Context.Request.Form["password"]);
-                return this.Response.AsJson(new {username = user.Item1});
+                Tuple<string, string> user = UserDatabase.CreateUser(this.Context.Request.Form["username"], this.Context.Request.Form["password"]);
+                return this.Response.AsJson(new { username = user.Item1 });
             });
         }
     }
